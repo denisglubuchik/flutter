@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> main() async {
+  await dotenv.load(fileName: ".env");
   await Supabase.initialize(
-    url: 'https://rstsltsdmdqbgjqvtwxx.supabase.co',
-    anonKey:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJzdHNsdHNkbWRxYmdqcXZ0d3h4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA1MDM4NTAsImV4cCI6MjA3NjA3OTg1MH0.js5Jh2TYiZ9c1Lqwzv3RbIBkykuo3s6ea1u_y0ncMAo',
+    url: dotenv.env['SUPABASE_URL']!,
+    anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
   );
   runApp(MyApp());
 }
@@ -53,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
               );
             },
           ),
-        ]
+        ],
       ),
     );
   }
